@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    cout << "Bienvenido al Estacionamiento" << endl; 
+    cout << "Bienvenido al Estacionamiento" << endl;
 
     const int max_Compacto = 8;
     const int max_Sedan = 12;
