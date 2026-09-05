@@ -18,7 +18,7 @@ int main() {
 
     
 
-    cout << "Ingrese el numero de espacios que va a usar: ";
+    cout << "Ingrese el numero de espacios que va a usar y el tipo de vehiculo (Compacto, Sedan, SUV): ";
     int ocupados;
     cin >> ocupados;
     if (ocupados < 0 || ocupados > max_Compacto
@@ -26,6 +26,18 @@ int main() {
         cout << "Numero de espacios ocupados invalido." << endl;
         return 1;
     }
+
+    cout << "Ha ingresado " << ocupados << " espacios ocupados." << endl;
+    cout << "Espacios restantes: " << max_total - ocupados << endl;
+    cout << "Espacios restantes por tipo de vehiculo:" << endl;
+    cout << "Compacto: " << max_Compacto - ocupados << endl;
+    cout << "Sedan: " << max_Sedan - ocupados << endl;
+    cout << "SUV: " << max_SUV - ocupados << endl;
+    
+    int porcentajeOcupacion = (max_total - ocupados) * 100 / max_total;
+    cout << "Porcentaje de ocupacion: " << porcentajeOcupacion << "%" << endl;
+    cin.ignore(); // Limpiar el buffer de entrada
+
 
     string Nombre;
     cout << "Ingrese su nombre: ";
@@ -50,6 +62,9 @@ int main() {
     cout << "Ingrese el color del vehiculo: ";
     cin >> color;
     cout << "El color ingresado es: " << color << endl;
+
+    cout << "gracias por usar nuestro estacionamiento, " << Nombre << endl;
+
 
     string comando = "" ;
     while (comando != "salir") {
