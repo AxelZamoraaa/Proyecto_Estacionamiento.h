@@ -3,91 +3,99 @@
 #include <iomanip>
 using namespace std;
 
+string aMinusculas(string texto) {
+    for (size_t i = 0; i < texto.length(); i++) {
+        texto[i] = tolower(texto[i]);
+    }
+    return texto;
+}
+
 int main() {
     cout << "Bienvenido al estacionamiento" << endl;
     
     // Este es el catalogo de las capacidades
-    const int max_Compacto = 10;
-    const int max_Sedan = 8;
-    const int max_SUV = 5;
-    const int max_total = max_Compacto + max_Sedan + max_SUV;
+    const int max_compacto = 10;
+    const int max_sedan = 8;
+    const int max_suv = 5;
+    const int max_total = max_compacto + max_sedan + max_suv;
 
     cout << "Tenemos " << max_total << " espacios disponibles." << endl;
 
     cout << "Espacios disponibles por tipo de vehiculo:" << endl;
-    cout << "Compacto: " << max_Compacto << endl;
-    cout << "Sedan: " << max_Sedan << endl;
-    cout << "SUV: " << max_SUV << endl;
+    cout << "compacto " << max_compacto << endl;
+    cout << "sedan: " << max_sedan << endl;
+    cout << "suv: " << max_suv << endl;
 
 
     // Aqui se guardan los lugares que estan ocupados (true = ocupado)
     
-    bool lugaresCompacto[10] = {false};
-    bool lugaresSedan[8] = {false};
-    bool lugaresSUV[5] = {false};
+    bool lugarecompacto[10] = {false};
+    bool lugaressedan[8] = {false};
+    bool lugaressuv[5] = {false};
 
     // Contadores para no recorrer los arreglos
-    int ocupCompacto = 0;
-    int ocupSedan = 0;
-    int ocupSUV = 0;
+    int ocupcompacto = 0;
+    int ocupsedan = 0;
+    int ocupsuv = 0;
 
     
-    cout << "Ingrese su vehiculo para la entrada (Compacto, Sedan, suv)" << endl;
-    cout << "o el numero de lugar para la salida (ej. SUV01)" << endl;
-    cout << "Escriba SALIR para terminar" << endl;
+    cout << "Ingrese su vehiculo para la entrada (Compacto, Sedan, Suv)" << endl;
+    cout << "o el numero de lugar para la salida (ej. Suv01)" << endl;
+    cout << "Escriba salir para terminar" << endl;
 
     string entrada = "";
 
     while (true) {
         cout << "> ";
         cin >> entrada;
+        string entradaMin = aMinusculas(entrada);
 
-        if (entrada == "SALIR") {
+        if (entrada == "salir") {
             cout << "Simulacion finalizada." << endl;
             break;
         }
 
-        else if (entrada == "Compacto" || entrada == "Sedan" || entrada == "Suv") {
+        else if (entrada == "compacto" || entrada == "sedan" || entrada == "suv") {
             // Alguien quiere entrar
             bool seAcepto = false;
             int lugarAsignado = 0;
 
-            if (entrada == "Compacto") {
-                for (int i = 0; i < max_Compacto; i++) {
-                    if (!lugaresCompacto[i]) {
-                        lugaresCompacto[i] = true;
+            if (entrada == "compacto") {
+                for (int i = 0; i < max_compacto; i++) {
+                    if (!lugarecompacto[i]) {
+                        lugarecompacto[i] = true;
                         lugarAsignado = i + 1;
-                        ocupCompacto++;
+                        ocupcompacto++;
                         seAcepto = true;
                         break;
                     }
                 }
-            } else if (entrada == "Sedan") {
-                for (int i = 0; i < max_Sedan; i++) {
-                    if (!lugaresSedan[i]) {
-                        lugaresSedan[i] = true;
+            } else if (entrada == "sedan") {
+                for (int i = 0; i < max_sedan; i++) {
+                    if (!lugaressedan[i]) {
+                        lugaressedan[i] = true;
                         lugarAsignado = i + 1;
-                        ocupSedan++;
+                        ocupsedan++;
                         seAcepto = true;
                         break;
                     }
                 }
-            } else if (entrada == "Suv") {
-                for (int i = 0; i < max_SUV; i++) {
-                    if (!lugaresSUV[i]) {
-                        lugaresSUV[i] = true;
+            } else if (entrada == "suv") {
+                for (int i = 0; i < max_suv; i++) {
+                    if (!lugaressuv[i]) {
+                        lugaressuv[i] = true;
                         lugarAsignado = i + 1;
-                        ocupSUV++;
+                        ocupsuv++;
                         seAcepto = true;
                         break;
                     }
                 }
             } else {
-                for (int i = 0; i < max_SUV; i++) {
-                    if (!lugaresSUV[i]) {
-                        lugaresSUV[i] = true;
+                for (int i = 0; i < max_suv; i++) {
+                    if (!lugaressuv[i]) {
+                        lugaressuv[i] = true;
                         lugarAsignado = i + 1;
-                        ocupSUV++;
+                        ocupsuv++;
                         seAcepto = true;
                         break;
                     }
@@ -102,10 +110,10 @@ int main() {
                 cout << "Vehiculo aceptado. Lugar asignado: " << entrada << numTexto << endl;
 
                 cout << "--- ESTADO DEL ESTACIONAMIENTO ---" << endl;
-                cout << "Compacto: " << ocupCompacto << "/" << max_Compacto << " ocupados" << endl;
-                cout << "Sedan: " << ocupSedan << "/" << max_Sedan << " ocupados" << endl;
-                cout << "Suv: " << ocupSUV << "/" << max_SUV << " ocupados" << endl;
-                int totalOcup = ocupCompacto + ocupSedan + ocupSUV;
+                cout << "Compacto: " << ocupcompacto << "/" << max_compacto << " ocupados" << endl;
+                cout << "Sedan: " << ocupsedan << "/" << max_sedan << " ocupados" << endl;
+                cout << "Suv: " << ocupsuv << "/" << max_suv << " ocupados" << endl;
+                int totalOcup = ocupcompacto + ocupsedan + ocupsuv;
                 double porcentaje = (double(totalOcup) / max_total) * 100;
                 cout << fixed << setprecision(1);
                 cout << "Ocupacion total: " << porcentaje << "% (" << totalOcup << "/" << max_total << ")" << endl;
@@ -120,14 +128,14 @@ int main() {
             string tipo = "";
             int largoTipo = 0;
 
-            if (entrada.length() > 8 && entrada.substr(0, 8) == "Compacto") {
-                tipo = "Compacto";
+            if (entrada.length() > 8 && entrada.substr(0, 8) == "compacto") {
+                tipo = "compacto";
                 largoTipo = 8;
-            } else if (entrada.length() > 5 && entrada.substr(0, 5) == "Sedan") {
-                tipo = "Sedan";
+            } else if (entrada.length() > 5 && entrada.substr(0, 5) == "sedan") {
+                tipo = "sedan";
                 largoTipo = 5;
-            } else if (entrada.length() > 3 && entrada.substr(0, 3) == "Suv") {
-                tipo = "Suv";
+            } else if (entrada.length() > 3 && entrada.substr(0, 3) == "suv") {
+                tipo = "suv";
                 largoTipo = 3;
             }
 
@@ -152,9 +160,9 @@ int main() {
                     }
 
                     int capacidad = 0;
-                    if (tipo == "Compacto") capacidad = max_Compacto;
-                    else if (tipo == "Sedan") capacidad = max_Sedan;
-                    else capacidad = max_SUV;
+                    if (tipo == "compacto") capacidad = max_compacto;
+                    else if (tipo == "sedan") capacidad = max_sedan;
+                    else if (tipo == "suv") capacidad = max_suv;
 
                     if (numLugar < 1 || numLugar > capacidad) {
                         cout << "Salida invalida: el lugar " << entrada << " no existe." << endl;
@@ -162,23 +170,23 @@ int main() {
                         int indice = numLugar - 1;
                         bool estabaOcupado = false;
 
-                        if (tipo == "Compacto") {
-                            estabaOcupado = lugaresCompacto[indice];
+                        if (tipo == "compacto") {
+                            estabaOcupado = lugarecompacto[indice];
                             if (estabaOcupado) {
-                                lugaresCompacto[indice] = false;
-                                ocupCompacto--;
+                                lugarecompacto[indice] = false;
+                                ocupcompacto--;
                             }
-                        } else if (tipo == "Sedan") {
-                            estabaOcupado = lugaresSedan[indice];
+                        } else if (tipo == "sedan") {
+                            estabaOcupado = lugaressedan[indice];
                             if (estabaOcupado) {
-                                lugaresSedan[indice] = false;
-                                ocupSedan--;
+                                lugaressedan[indice] = false;
+                                ocupsedan--;
                             }
-                        } else {
-                            estabaOcupado = lugaresSUV[indice];
+                        } else if (tipo == "suv") {
+                            estabaOcupado = lugaressuv[indice];
                             if (estabaOcupado) {
-                                lugaresSUV[indice] = false;
-                                ocupSUV--;
+                                lugaressuv[indice] = false;
+                                ocupsuv--;
                             }
                         }
 
@@ -188,10 +196,10 @@ int main() {
                             cout << "Vehiculo de lugar " << entrada << " ha salido." << endl;
 
                             cout << "--- ESTADO DEL ESTACIONAMIENTO ---" << endl;
-                            cout << "Compacto: " << ocupCompacto << "/" << max_Compacto << " ocupados" << endl;
-                            cout << "Sedan: " << ocupSedan << "/" << max_Sedan << " ocupados" << endl;
-                            cout << "Suv: " << ocupSUV << "/" << max_SUV << " ocupados" << endl;
-                            int totalOcup = ocupCompacto + ocupSedan + ocupSUV;
+                            cout << "compacto: " << ocupcompacto << "/" << max_compacto << " ocupados" << endl;
+                            cout << "sedan: " << ocupsedan << "/" << max_sedan << " ocupados" << endl;
+                            cout << "suv: " << ocupsuv << "/" << max_suv << " ocupados" << endl;
+                            int totalOcup = ocupcompacto + ocupsedan + ocupsuv;
                             double porcentaje = (double(totalOcup) / max_total) * 100;
                             cout << fixed << setprecision(1);
                             cout << "Ocupacion total: " << porcentaje << "% (" << totalOcup << "/" << max_total << ")" << endl;
