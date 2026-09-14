@@ -170,17 +170,17 @@ int main() {
                         int indice = numLugar - 1;
                         bool estabaOcupado = false;
 
-                       == "sedan") {
-                            estabaOcupado = lugaressedan[indice];
-                            if (estabaOcupado) {
-                                lugaressedan[indice] = false;
-                                ocupsedan--; if (tipo == "compacto") {
+                        if (tipo == "compacto") {
                             estabaOcupado = lugarecompacto[indice];
                             if (estabaOcupado) {
                                 lugarecompacto[indice] = false;
                                 ocupcompacto--;
                             }
-                        } else if (tipo 
+                        } else if (tipo == "sedan") {
+                            estabaOcupado = lugaressedan[indice];
+                            if (estabaOcupado) {
+                                lugaressedan[indice] = false;
+                                ocupsedan--;
                             }
                         } else if (tipo == "suv") {
                             estabaOcupado = lugaressuv[indice];
